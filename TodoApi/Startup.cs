@@ -23,6 +23,8 @@ namespace TodoApi
             services.AddControllers();
             services.AddHealthChecks();
             services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
+            services.AddDbContext<ContactContext>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("ContactsConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
