@@ -1,9 +1,17 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
+using NLog;
+using System;
+using System.IO;
+using System.Net;
+using TodoApi.Extensions;
 using TodoApi.Models;
 
 namespace TodoApi
@@ -12,6 +20,7 @@ namespace TodoApi
     {
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
         }
 
@@ -20,11 +29,14 @@ namespace TodoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.ConfigureCors();
+            services.ConfigureIISIntegration();
+            services.ConfigureLoggerService();
+            services.ConfigureSqlServerContext(Configuration);
+            services.ConfigureRepositoryWrapper();
+			services.AddControllers();
             services.AddHealthChecks();
-            services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
-            services.AddDbContext<ContactContext>(opt =>
-                opt.UseSqlServer(Configuration.GetConnectionString("ContactsConnection")));
+            //services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,7 +47,37 @@ namespace TodoApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseExceptionHandler(appError =>
+			{
+				appError.Run(async context =>
+				{
+					context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+					context.Response.ContentType = "application/json";
+
+					var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+					if (contextFeature != null)
+					{
+						Console.WriteLine($"Something went wrong: {contextFeature.Error}");
+
+						await context.Response.WriteAsync(new 
+						{
+							context.Response.StatusCode,
+							Message = "Internal Server Error."
+						}.ToString());
+					}
+				});
+			});
+
             app.UseHttpsRedirection();
+
+            app.UseCors("CorsPolicy");
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
+
+            app.UseStaticFiles();
 
             app.UseRouting();
 

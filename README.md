@@ -8,3 +8,7 @@ https://jeremylindsayni.wordpress.com/2019/09/09/healthcheck-endpoints-in-c-in-m
 https://github.com/SoftwareDeveloperBlog/Mssql-docker-initialization-demo
 
 https://zelig880.com/how-to-setup-sql-and-create-tables-with-entity-framework-using-net-core
+
+https://code-maze.com/filtering-aspnet-core-webapi/
+
+https://code-maze.com/aspnetcore-webapi-best-practices/

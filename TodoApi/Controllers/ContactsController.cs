@@ -1,25 +1,48 @@
-using System.Collections.Generic;
-using System.Linq;
+using System;
+using Contracts;
+using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
-using TodoApi.Models;
+using Newtonsoft.Json;
 
 namespace TodoApi.Controllers
 {
-    [Route("api/[controller]")]
-    public class ContactsController : Controller
+    [Route("api/contacts")]
+    public class ContactsController : ControllerBase
     {
-        private readonly ContactContext _context;
+        private ILoggerManager _logger;
+		private IRepositoryWrapper _repository;
 
-        public ContactsController(ContactContext context)
-        {
-            _context = context;
-        }
+        public ContactsController(ILoggerManager logger, IRepositoryWrapper repository)
+		{
+			_logger = logger;
+			_repository = repository;
+		}
 
-        // GET: api/Contacts
         [HttpGet]
-        public IEnumerable<Contact> GetContacts()
-        {
-            return _context.Contacts.ToList();
-        }
+		public IActionResult GetContacts([FromQuery] ContactParameters contactParameters)
+		{
+			if (!contactParameters.ValidAgeRange)
+			{
+				return BadRequest("Max age cannot be less than min age");
+			}
+
+			var contacts = _repository.Contact.GetContacts(contactParameters);
+
+			var metadata = new
+			{
+				contacts.TotalCount,
+				contacts.PageSize,
+				contacts.CurrentPage,
+				contacts.TotalPages,
+				contacts.HasNext,
+				contacts.HasPrevious
+			};
+
+			Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+
+			_logger.LogInfo($"Returned {contacts.TotalCount} owners from database.");
+
+			return Ok(contacts);
+		}
     }
 }
