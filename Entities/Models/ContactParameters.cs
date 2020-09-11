@@ -4,10 +4,11 @@ namespace Entities.Models
 {
 	public class ContactParameters : QueryStringParameters
 	{
-        private const uint DefaultMaxAge = 100;
+        private const int DefaultMaxAge = 100;
 
-        public uint MinAge { get; set; }
-		public uint MaxAge { get; set; } = DefaultMaxAge;
+        public int MinAge { get; set; }
+		public int MaxAge { get; set; } = DefaultMaxAge;
+		public string Gender { get; set; }
 
 		public bool ValidAgeRange => MaxAge > MinAge;
 	}

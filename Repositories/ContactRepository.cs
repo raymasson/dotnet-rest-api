@@ -2,6 +2,8 @@ using Contracts;
 using Entities;
 using Entities.Helpers;
 using Entities.Models;
+using System;
+using System.Linq.Expressions;
 
 namespace Repository
 {
@@ -14,8 +16,27 @@ namespace Repository
 
 		public PagedList<Contact> GetContacts(ContactParameters contactParameters)
 		{
-			var contacts = FindByCondition(c => c.Age >= contactParameters.MinAge &&
-										c.Age <= contactParameters.MaxAge);
+			// Build dynamically the lambda expression for filters
+			var parameter = Expression.Parameter(typeof(Contact), "c");
+
+			// Age filter
+			var minAgeConstant = Expression.Constant(contactParameters.MinAge);
+			var maxAgeConstant = Expression.Constant(contactParameters.MaxAge);
+			var ageProperty = Expression.Property(parameter, "Age");
+			var minAgeExpression = Expression.GreaterThanOrEqual(ageProperty, minAgeConstant);
+			var maxAgeExpression = Expression.LessThanOrEqual(ageProperty, maxAgeConstant);
+			var expression = Expression.And(minAgeExpression, maxAgeExpression);
+			
+			// Gender filter
+			if (!String.IsNullOrEmpty(contactParameters.Gender)) {
+				var genderProperty = Expression.Property(parameter, "Gender"); 
+				var genderConstant = Expression.Constant(contactParameters.Gender);
+				var genderExpression = Expression.Equal(genderProperty, genderConstant);
+				expression = Expression.And(expression, genderExpression);
+			}
+
+			// Find contacts
+			var contacts = FindByCondition( Expression.Lambda<Func<Contact,bool>>(expression, parameter));
 
 			return PagedList<Contact>.ToPagedList(
                 contacts,
