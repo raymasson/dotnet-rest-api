@@ -21,5 +21,7 @@ namespace Entities.Models
 
 		[Required(ErrorMessage = "Age is required")]
 		public int Age { get; set; }
+
+        public string Gender { get; set; }
 	}
 }

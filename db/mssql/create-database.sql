@@ -19,6 +19,7 @@ CREATE TABLE [dbo].[Contacts](
 	[FirstName] [varchar](50) NOT NULL,
 	[LastName] [varchar](50) NOT NULL,
     [Age] [int] NOT NULL,
+	[Gender] [varchar](50) NOT NULL,
  CONSTRAINT [PK_Contacts] PRIMARY KEY CLUSTERED
 (
 	[Id] ASC
@@ -27,9 +28,15 @@ GO
 
 SET IDENTITY_INSERT [dbo].[Contacts] ON
 GO
-INSERT [dbo].[Contacts] ([Id], [FirstName], [LastName], [Age]) VALUES (1, N'Loic', N'BLAIR', 33)
+INSERT [dbo].[Contacts] ([Id], [FirstName], [LastName], [Age], [Gender]) VALUES (1, N'Loic', N'BLAIR', 33, N'male')
 GO
-INSERT [dbo].[Contacts] ([Id], [FirstName], [LastName], [Age]) VALUES (2, N'Mélanie', N'SULLIVAN', 52)
+INSERT [dbo].[Contacts] ([Id], [FirstName], [LastName], [Age], [Gender]) VALUES (2, N'Mélanie', N'SULLIVAN', 52, N'female')
+GO
+INSERT [dbo].[Contacts] ([Id], [FirstName], [LastName], [Age], [Gender]) VALUES (3, N'Tom', N'BOYER', 2, N'male')
+GO
+INSERT [dbo].[Contacts] ([Id], [FirstName], [LastName], [Age], [Gender]) VALUES (4, N'Stéphanie', N'DURAND', 13, N'female')
+GO
+INSERT [dbo].[Contacts] ([Id], [FirstName], [LastName], [Age], [Gender]) VALUES (5, N'Raymond', N'THOMSON', 92, N'male')
 GO
 SET IDENTITY_INSERT [dbo].[Contacts] OFF
 GO

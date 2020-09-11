@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using TodoApi.Models;
+using Api.Models;
 
-namespace TodoApi.Controllers
+namespace Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

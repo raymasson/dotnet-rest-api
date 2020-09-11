@@ -1,0 +1,13 @@
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Repository/bin/Debug/netcoreapp3.1/Repository.deps.json
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Repository/bin/Debug/netcoreapp3.1/Repository.dll
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Repository/bin/Debug/netcoreapp3.1/Repository.pdb
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Repository/bin/Debug/netcoreapp3.1/Contracts.dll
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Repository/bin/Debug/netcoreapp3.1/Entities.dll
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Repository/bin/Debug/netcoreapp3.1/Contracts.pdb
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Repository/bin/Debug/netcoreapp3.1/Entities.pdb
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Repository/obj/Debug/netcoreapp3.1/Repository.csprojAssemblyReference.cache
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Repository/obj/Debug/netcoreapp3.1/Repository.AssemblyInfoInputs.cache
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Repository/obj/Debug/netcoreapp3.1/Repository.AssemblyInfo.cs
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Repository/obj/Debug/netcoreapp3.1/Repository.csproj.CopyComplete
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Repository/obj/Debug/netcoreapp3.1/Repository.dll
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Repository/obj/Debug/netcoreapp3.1/Repository.pdb

@@ -1,0 +1,13 @@
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Logger/bin/Debug/netcoreapp3.1/Logger.deps.json
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Logger/bin/Debug/netcoreapp3.1/Logger.dll
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Logger/bin/Debug/netcoreapp3.1/Logger.pdb
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Logger/bin/Debug/netcoreapp3.1/Contracts.dll
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Logger/bin/Debug/netcoreapp3.1/Entities.dll
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Logger/bin/Debug/netcoreapp3.1/Contracts.pdb
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Logger/bin/Debug/netcoreapp3.1/Entities.pdb
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Logger/obj/Debug/netcoreapp3.1/Logger.csprojAssemblyReference.cache
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Logger/obj/Debug/netcoreapp3.1/Logger.AssemblyInfoInputs.cache
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Logger/obj/Debug/netcoreapp3.1/Logger.AssemblyInfo.cs
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Logger/obj/Debug/netcoreapp3.1/Logger.csproj.CopyComplete
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Logger/obj/Debug/netcoreapp3.1/Logger.dll
+/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Logger/obj/Debug/netcoreapp3.1/Logger.pdb

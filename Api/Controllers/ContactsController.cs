@@ -4,7 +4,7 @@ using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace TodoApi.Controllers
+namespace Api.Controllers
 {
     [Route("api/contacts")]
     public class ContactsController : ControllerBase

@@ -2,9 +2,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TodoApi.Models;
+using Api.Models;
 
-namespace TodoApi.Controllers
+namespace Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

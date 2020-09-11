@@ -11,10 +11,10 @@ using NLog;
 using System;
 using System.IO;
 using System.Net;
-using TodoApi.Extensions;
-using TodoApi.Models;
+using Api.Extensions;
+using Api.Models;
 
-namespace TodoApi
+namespace Api
 {
     public class Startup
     {
@@ -68,7 +68,7 @@ namespace TodoApi
 				});
 			});
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseCors("CorsPolicy");
 

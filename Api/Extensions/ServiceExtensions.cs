@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repository;
 
-namespace TodoApi.Extensions
+namespace Api.Extensions
 {
     public static class ServiceExtensions
     {
