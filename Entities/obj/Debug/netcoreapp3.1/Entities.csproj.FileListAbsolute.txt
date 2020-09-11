@@ -1,7 +1,0 @@
-/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Entities/bin/Debug/netcoreapp3.1/Entities.deps.json
-/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Entities/bin/Debug/netcoreapp3.1/Entities.dll
-/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Entities/bin/Debug/netcoreapp3.1/Entities.pdb
-/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Entities/obj/Debug/netcoreapp3.1/Entities.AssemblyInfoInputs.cache
-/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Entities/obj/Debug/netcoreapp3.1/Entities.AssemblyInfo.cs
-/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Entities/obj/Debug/netcoreapp3.1/Entities.dll
-/Users/raymondmasson/Git/github.com/raymasson/dotnet-rest-api/Entities/obj/Debug/netcoreapp3.1/Entities.pdb
