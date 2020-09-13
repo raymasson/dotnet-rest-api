@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Repository
+namespace Repositories
 {
 	public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {

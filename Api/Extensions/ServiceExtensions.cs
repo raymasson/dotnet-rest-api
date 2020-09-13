@@ -1,11 +1,13 @@
 using Contracts;
 using Entities;
+using Entities.Helpers;
+using Entities.Models;
 using Logger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Repository;
+using Repositories;
 
 namespace Api.Extensions
 {
@@ -44,6 +46,7 @@ namespace Api.Extensions
 
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)
         {
+            services.AddScoped<ISortHelper<Contact>, SortHelper<Contact>>();
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
         }
     }

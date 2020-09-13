@@ -4,6 +4,11 @@ namespace Entities.Models
 {
 	public class ContactParameters : QueryStringParameters
 	{
+		public ContactParameters()
+		{
+			SortBy = "id";
+		}
+
         private const int DefaultMaxAge = 100;
 
         public int MinAge { get; set; }

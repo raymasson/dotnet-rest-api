@@ -38,5 +38,7 @@ INSERT [dbo].[Contacts] ([Id], [FirstName], [LastName], [Age], [Gender]) VALUES 
 GO
 INSERT [dbo].[Contacts] ([Id], [FirstName], [LastName], [Age], [Gender]) VALUES (5, N'Raymond', N'THOMSON', 92, N'male')
 GO
+INSERT [dbo].[Contacts] ([Id], [FirstName], [LastName], [Age], [Gender]) VALUES (6, N'Thomas', N'THOMSON', 93, N'male')
+GO
 SET IDENTITY_INSERT [dbo].[Contacts] OFF
 GO

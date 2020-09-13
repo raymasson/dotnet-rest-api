@@ -11,6 +11,8 @@ https://zelig880.com/how-to-setup-sql-and-create-tables-with-entity-framework-us
 
 https://code-maze.com/filtering-aspnet-core-webapi/
 
+https://code-maze.com/sorting-aspnet-core-webapi/
+
 https://code-maze.com/aspnetcore-webapi-best-practices/
 
 https://www.codemag.com/Article/1607041/Simplest-Thing-Possible-Dynamic-Lambda-Expressions

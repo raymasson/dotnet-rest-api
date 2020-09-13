@@ -17,5 +17,7 @@ namespace Entities.Models
 				_pageSize = (value > maxPageSize) ? maxPageSize : value;
 			}
 		}
+
+		public string SortBy { get; set; }
 	}
 }

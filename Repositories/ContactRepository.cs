@@ -5,13 +5,16 @@ using Entities.Models;
 using System;
 using System.Linq.Expressions;
 
-namespace Repository
+namespace Repositories
 {
     public class ContactRepository : RepositoryBase<Contact>, IContactRepository
 	{
-		public ContactRepository(RepositoryContext repositoryContext)
+		private ISortHelper<Contact> _sortHelper;
+
+		public ContactRepository(RepositoryContext repositoryContext, ISortHelper<Contact> sortHelper)
 			: base(repositoryContext)
 		{
+			_sortHelper = sortHelper;
 		}
 
 		public PagedList<Contact> GetContacts(ContactParameters contactParameters)
@@ -38,8 +41,11 @@ namespace Repository
 			// Find contacts
 			var contacts = FindByCondition( Expression.Lambda<Func<Contact,bool>>(expression, parameter));
 
+			// Sort contacts
+			var sortedContacts = _sortHelper.ApplySort(contacts, contactParameters.SortBy);
+
 			return PagedList<Contact>.ToPagedList(
-                contacts,
+                sortedContacts,
 				contactParameters.PageNumber,
 				contactParameters.PageSize);
 		}
