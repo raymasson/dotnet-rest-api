@@ -23,6 +23,7 @@ namespace Api.Controllers
 		{
 			if (!contactParameters.ValidAgeRange)
 			{
+				_logger.LogWarn("Wrong parameter: Age");
 				return BadRequest("Max age cannot be less than min age");
 			}
 
@@ -40,7 +41,7 @@ namespace Api.Controllers
 
 			Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
 
-			_logger.LogInfo($"Returned {contacts.TotalCount} owners from database.");
+			_logger.LogInfo($"Returned {contacts.TotalCount} contacts from database.");
 
 			return Ok(contacts);
 		}
