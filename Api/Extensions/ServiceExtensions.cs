@@ -1,3 +1,4 @@
+using System;
 using Contracts;
 using Entities;
 using Entities.Helpers;
@@ -40,7 +41,7 @@ namespace Api.Extensions
 
         public static void ConfigureSqlServerContext(this IServiceCollection services, IConfiguration config)
         {
-            var connectionString = config["ConnectionStrings:ContactsConnection"];
+            var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING_TEST_SQL_SERVER");
             services.AddDbContext<RepositoryContext>(o => o.UseSqlServer(connectionString));
         }
 
