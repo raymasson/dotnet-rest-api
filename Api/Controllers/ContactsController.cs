@@ -1,12 +1,12 @@
-using System;
 using Contracts;
+using Entities.Helpers;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace Api.Controllers
 {
-    [Route("api/contacts")]
+    [Route("api/[controller]")]
     public class ContactsController : ControllerBase
     {
         private ILoggerManager _logger;
@@ -19,14 +19,14 @@ namespace Api.Controllers
 		}
 
         [HttpGet]
-		public IActionResult GetContacts([FromQuery] ContactParameters contactParameters)
+		public ActionResult<PagedList<Contact>> GetContacts([FromQuery] ContactParameters contactParameters)
 		{
 			if (!contactParameters.ValidAgeRange)
 			{
 				_logger.LogWarn("Wrong parameter: Age");
 				return BadRequest("Max age cannot be less than min age");
 			}
-
+			
 			var contacts = _repository.Contact.GetContacts(contactParameters);
 
 			var metadata = new
