@@ -16,3 +16,5 @@ https://code-maze.com/sorting-aspnet-core-webapi/
 https://code-maze.com/aspnetcore-webapi-best-practices/
 
 https://www.codemag.com/Article/1607041/Simplest-Thing-Possible-Dynamic-Lambda-Expressions
+
+https://code-maze.com/unit-testing-aspnetcore-web-api/

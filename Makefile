@@ -1,2 +1,2 @@
 test:
-	dotnet test ./**.Tests
+	./run-tests.sh

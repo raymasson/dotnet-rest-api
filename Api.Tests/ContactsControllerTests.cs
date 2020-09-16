@@ -7,6 +7,7 @@ using Entities.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace Api.Tests
@@ -34,7 +35,7 @@ namespace Api.Tests
                 PagedList<Contact>.ToPagedList(
                     _contacts.AsQueryable(),
 				    1,
-				    10
+				    2
                 )
             );
             _mockRepoWrapper.Setup(x => x.Contact).Returns(_mockRepo.Object);
@@ -81,14 +82,26 @@ namespace Api.Tests
         }
 
         [Fact]
-        public void GetContacts_WhenCalled_ReturnsAllItems()
+        public void GetContacts_WhenCalled_ReturnsAllItems_And_Pagination()
         {
+            // Arrange
+            var metadata = new
+			{
+				TotalCount = 1,
+				PageSize = 2,
+				CurrentPage = 1,
+				TotalPages = 1,
+				HasNext = false,
+				HasPrevious = false
+			};
+
             // Act
             var okResult = _controller.GetContacts(new ContactParameters()).Result as OkObjectResult;
 
             // Assert
             var items = Assert.IsType<PagedList<Contact>>(okResult.Value);
             Assert.Single(items);
+            Assert.Equal(JsonConvert.SerializeObject(metadata), _controller.HttpContext.Response.Headers["X-Pagination"]);
         }
     }
 }
