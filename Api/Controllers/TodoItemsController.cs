@@ -6,12 +6,19 @@ using Api.Models;
 
 namespace Api.Controllers
 {
+    /// <summary>
+	/// The TodoItemsController class.
+	/// Contains all actions for performing CRUD on todo list.
+	/// </summary>
     [ApiController]
     [Route("api/[controller]")]
     public class TodoItemsController : ControllerBase
     {
         private readonly TodoContext _context;
 
+        /// <summary>
+		/// TodoItemsController constructor
+		/// </summary>
         public TodoItemsController(TodoContext context)
         {
             _context = context;

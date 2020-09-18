@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,7 +11,7 @@ using System;
 using System.IO;
 using System.Net;
 using Api.Extensions;
-using Api.Models;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Api
 {
@@ -36,6 +35,10 @@ namespace Api
             services.ConfigureRepositoryWrapper();
 			services.AddControllers();
             services.AddHealthChecks();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo {Title = "API doc", Version = "v1"});
+            });
             //services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
         }
 
@@ -89,6 +92,14 @@ namespace Api
             });
 
             app.UseHealthChecks("/health");
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
+                c.RoutePrefix = string.Empty;
+            });
         }
     }
 }

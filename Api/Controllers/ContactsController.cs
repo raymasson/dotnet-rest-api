@@ -7,18 +7,28 @@ using Newtonsoft.Json;
 
 namespace Api.Controllers
 {
+	/// <summary>
+	/// The ContactsController class.
+	/// Contains all actions for performing CRUD on contacts.
+	/// </summary>
     [Route("api/[controller]")]
     public class ContactsController : ControllerBase
     {
         private ILoggerManager _logger;
 		private IRepositoryWrapper _repository;
 
+		/// <summary>
+		/// ContactsController constructor
+		/// </summary>
         public ContactsController(ILoggerManager logger, IRepositoryWrapper repository)
 		{
 			_logger = logger;
 			_repository = repository;
 		}
 
+		/// <summary>
+		/// Gets contacts with filtering, sorting and pagination
+		/// </summary>
         [HttpGet]
 		public ActionResult<PagedList<Contact>> GetContacts([FromQuery] ContactParameters contactParameters)
 		{
