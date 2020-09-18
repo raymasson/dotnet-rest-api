@@ -54,7 +54,7 @@ namespace Api.Controllers
 
 				Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
 
-				_logger.LogInfo($"Returned {contacts.TotalCount} contacts from database.");
+				_logger.LogInfo($"Returned {contacts.Count} out of {contacts.TotalCount} contacts from database.");
 
 				return Ok(contacts);
 			} catch(Exception ex) {
