@@ -1,5 +1,8 @@
 # dotnet-rest-api
+
 REST API in .Net Core 
+
+## Resources
 
 https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-3.1&tabs=visual-studio-code
 
@@ -20,3 +23,27 @@ https://www.codemag.com/Article/1607041/Simplest-Thing-Possible-Dynamic-Lambda-E
 https://code-maze.com/unit-testing-aspnetcore-web-api/
 
 https://code-maze.com/global-error-handling-aspnetcore/
+
+## Run local MSSQL DB
+
+``` bash
+cd db/mssql
+make build-db
+make run-db
+```
+
+## Run Api
+
+``` bash
+make run
+```
+
+Service health: `http://localhost:5000/health`
+
+Service swagger (API doc) : `http://localhost:5000/index.html`
+
+## Test
+
+``` bash
+make test
+```
