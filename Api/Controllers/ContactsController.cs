@@ -1,3 +1,4 @@
+using System;
 using Contracts;
 using Entities.Helpers;
 using Entities.Models;
@@ -21,29 +22,35 @@ namespace Api.Controllers
         [HttpGet]
 		public ActionResult<PagedList<Contact>> GetContacts([FromQuery] ContactParameters contactParameters)
 		{
-			if (!contactParameters.ValidAgeRange)
-			{
-				_logger.LogWarn("Wrong parameter: Age");
-				return BadRequest("Max age cannot be less than min age");
-			}
-			
-			var contacts = _repository.Contact.GetContacts(contactParameters);
+			try{
+				//throw new Exception("Exception while fetching the contacts from the storage.");
+				if (!contactParameters.ValidAgeRange)
+				{
+					_logger.LogWarn("Wrong parameter: Age");
+					return BadRequest("Max age cannot be less than min age");
+				} 
+				
+				var contacts = _repository.Contact.GetContacts(contactParameters);
 
-			var metadata = new
-			{
-				contacts.TotalCount,
-				contacts.PageSize,
-				contacts.CurrentPage,
-				contacts.TotalPages,
-				contacts.HasNext,
-				contacts.HasPrevious
-			};
+				var metadata = new
+				{
+					contacts.TotalCount,
+					contacts.PageSize,
+					contacts.CurrentPage,
+					contacts.TotalPages,
+					contacts.HasNext,
+					contacts.HasPrevious
+				};
 
-			Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+				Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
 
-			_logger.LogInfo($"Returned {contacts.TotalCount} contacts from database.");
+				_logger.LogInfo($"Returned {contacts.TotalCount} contacts from database.");
 
-			return Ok(contacts);
+				return Ok(contacts);
+			} catch(Exception ex) {
+				_logger.LogError($"Exception while fetching the contacts. {ex}");
+				return StatusCode(500, "Internal server error");
+			}	
 		}
     }
 }
