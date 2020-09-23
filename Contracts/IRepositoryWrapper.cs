@@ -7,5 +7,6 @@ namespace Contracts
     public interface IRepositoryWrapper
     {
         IContactRepository Contact { get; }
+        IAddressRepository Address { get; }
 	}
 }

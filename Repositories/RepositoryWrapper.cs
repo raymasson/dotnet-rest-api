@@ -9,6 +9,8 @@ namespace Repositories
     {
         private RepositoryContext _repoContext;
         private IContactRepository _contact;
+
+        private IAddressRepository _address;
         private ISortHelper<Contact> _contactSortHelper;
 
         public IContactRepository Contact
@@ -21,6 +23,19 @@ namespace Repositories
                 }
 
                 return _contact;
+            }
+        }
+
+        public IAddressRepository Address
+        {
+            get
+            {
+                if (_address == null)
+                {
+                    _address = new AddressRepository(_repoContext);
+                }
+
+                return _address;
             }
         }
 

@@ -11,7 +11,6 @@ using System;
 using System.IO;
 using System.Net;
 using Api.Extensions;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace Api
 {

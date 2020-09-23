@@ -42,3 +42,20 @@ INSERT [dbo].[Contacts] ([Id], [FirstName], [LastName], [Age], [Gender]) VALUES 
 GO
 SET IDENTITY_INSERT [dbo].[Contacts] OFF
 GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Addresses](
+	[ZipCode] [int] NOT NULL,
+	[City] [varchar](50) NOT NULL,
+    [ContactId] [int] NOT NULL,
+FOREIGN KEY (ContactId) REFERENCES Contacts(Id)
+) ON [PRIMARY]
+GO
+
+INSERT [dbo].[Addresses] ([ZipCode], [City], [ContactId]) VALUES (06130, N'GRASSE', 1)
+GO
+INSERT [dbo].[Addresses] ([ZipCode], [City], [ContactId]) VALUES (44000, N'NANTES', 4)
+GO
