@@ -15,7 +15,7 @@ namespace Repositories
 
 		}
 
-		public List<FullContact> GetFullContacts()
+		public List<FullContact> GetFullContacts(ContactParameters contactParameters)
 		{              
             // INNER JOIN
 			/*return this.RepositoryContext.Contacts.Join(
@@ -59,9 +59,15 @@ namespace Repositories
                               {
                                   FirstName = contact.FirstName,
                                   LastName = contact.LastName,
+                                  Gender = contact.Gender,
                                   ZipCode = address.ZipCode,
                                   City = address.City,
                               };
+                              
+            // Filters
+            if (!string.IsNullOrEmpty(contactParameters.Gender)) {
+                query = query.Where(x => x.Gender == contactParameters.Gender);
+            }
             return query.ToList();
 		}
 	}

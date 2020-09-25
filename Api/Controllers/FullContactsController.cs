@@ -20,9 +20,9 @@ namespace Api.Controllers
 		}
 
         [HttpGet]
-		public ActionResult<List<FullContact>> GetFullContacts()
+		public ActionResult<List<FullContact>> GetFullContacts([FromQuery] ContactParameters contactParameters)
 		{
-            var fullContacts = _repository.Address.GetFullContacts();
+            var fullContacts = _repository.Address.GetFullContacts(contactParameters);
 
             return Ok(fullContacts);
 		}

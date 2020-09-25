@@ -5,6 +5,6 @@ namespace Contracts
 {
     public interface IAddressRepository : IRepositoryBase<Address>
 	{
-		List<FullContact> GetFullContacts();
+		List<FullContact> GetFullContacts(ContactParameters contactParameters);
 	}
 }
