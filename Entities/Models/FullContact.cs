@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Entities.Models
 {
     public class FullContact
@@ -11,5 +13,7 @@ namespace Entities.Models
         public string LastName { get; set; }
 
 		public string Gender { get; set; }
+
+		public List<Child> Children { get; set; }
 	}
 }

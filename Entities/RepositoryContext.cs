@@ -12,5 +12,6 @@ namespace Entities
 
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Child> Children { get; set; }
 	}
 }

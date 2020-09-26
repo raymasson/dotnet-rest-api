@@ -17,7 +17,7 @@ namespace Repositories
 
 		public List<FullContact> GetFullContacts(ContactParameters contactParameters)
 		{              
-            // INNER JOIN
+            // INNER JOIN lambda
 			/*return this.RepositoryContext.Contacts.Join(
                 this.RepositoryContext.Addresses,
                 contact => contact.Id,
@@ -31,7 +31,7 @@ namespace Repositories
                 }   
             ).ToList();*/
 
-            // LEFT JOIN
+            // LEFT JOIN lambda
             /*return this.RepositoryContext.Contacts
                     .GroupJoin(
                         this.RepositoryContext.Addresses,
@@ -49,8 +49,8 @@ namespace Repositories
                         }
                     ).ToList();*/
 
-            // Query syntax
-            var query = from contact in this.RepositoryContext.Contacts
+            // LEFT JOIN Query syntax
+            /*var query = from contact in this.RepositoryContext.Contacts
                               join address in this.RepositoryContext.Addresses
                               on contact.Id equals address.ContactId
                               into ContactAddressGroup
@@ -62,13 +62,56 @@ namespace Repositories
                                   Gender = contact.Gender,
                                   ZipCode = address.ZipCode,
                                   City = address.City,
-                              };
-                              
+                              };*/
+
+            var query = from contact in this.RepositoryContext.Contacts 
+                        join child in this.RepositoryContext.Children on contact.Id equals child.ContactId
+                        into ChildGroup
+                        from c in ChildGroup.DefaultIfEmpty()
+                        join address in this.RepositoryContext.Addresses on contact.Id equals address.ContactId
+                        into AddressGroup
+                        from a in AddressGroup.DefaultIfEmpty()
+                        select new { 
+                            Contact = contact,
+                            Address = new {
+                                ZipCode = a.ZipCode,
+                                City = a.City,
+                            }, 
+                            ChildName = c.Name
+                        };  
             // Filters
             if (!string.IsNullOrEmpty(contactParameters.Gender)) {
-                query = query.Where(x => x.Gender == contactParameters.Gender);
+                query = query.Where(q => q.Contact.Gender == contactParameters.Gender);
             }
-            return query.ToList();
+
+            // Group by contact
+            var grouping = query.ToLookup(q => q.Contact.Id);   
+            Console.WriteLine("Items Count: {0}", grouping.Count);        
+
+            List<FullContact> fullContacts = new List<FullContact>{};
+            foreach (var item in grouping)
+            {
+                var fullContact = new FullContact() {
+                    FirstName = item.First().Contact.FirstName,
+                    LastName = item.First().Contact.LastName,
+                    Gender = item.First().Contact.Gender,
+                    ZipCode = item.First().Address.ZipCode,
+                    City = item.First().Address.City,
+                    Children = new List<Child>{}
+                };
+                
+                foreach (var i in item) {
+                    fullContact.Children.Add(
+                        new Child(){
+                            Name = i.ChildName
+                        }
+                    );
+                }
+
+                fullContacts.Add(fullContact);
+            }
+
+            return fullContacts;
 		}
 	}
 }

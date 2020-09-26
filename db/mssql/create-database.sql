@@ -59,3 +59,22 @@ INSERT [dbo].[Addresses] ([ZipCode], [City], [ContactId]) VALUES (06130, N'GRASS
 GO
 INSERT [dbo].[Addresses] ([ZipCode], [City], [ContactId]) VALUES (44000, N'NANTES', 4)
 GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Children](
+	[Id] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+    [ContactId] [int] NOT NULL,
+FOREIGN KEY (ContactId) REFERENCES Contacts(Id)
+) ON [PRIMARY]
+GO
+
+INSERT [dbo].[Children] ([Id], [Name], [ContactId]) VALUES (1, N'Toto', 2)
+GO
+INSERT [dbo].[Children] ([Id], [Name], [ContactId]) VALUES (2, N'Titi', 2)
+GO
+INSERT [dbo].[Children] ([Id], [Name], [ContactId]) VALUES (3, N'Tata', 3)
+GO
