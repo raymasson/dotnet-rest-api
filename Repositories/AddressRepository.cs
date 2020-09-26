@@ -64,53 +64,55 @@ namespace Repositories
                                   City = address.City,
                               };*/
 
-            var query = from contact in this.RepositoryContext.Contacts 
-                        join child in this.RepositoryContext.Children on contact.Id equals child.ContactId
+            List<FullContact> fullContacts = new List<FullContact>{};
+
+            using (var context = this.RepositoryContext) {
+                var query = from contact in context.Contacts 
+                        join child in context.Children on contact.Id equals child.ContactId
                         into ChildGroup
                         from c in ChildGroup.DefaultIfEmpty()
-                        join address in this.RepositoryContext.Addresses on contact.Id equals address.ContactId
+                        join address in context.Addresses on contact.Id equals address.ContactId
                         into AddressGroup
                         from a in AddressGroup.DefaultIfEmpty()
                         select new { 
                             Contact = contact,
-                            Address = new {
-                                ZipCode = a.ZipCode,
-                                City = a.City,
-                            }, 
-                            ChildName = c.Name
+                            Address = a, 
+                            Child = c
                         };  
-            // Filters
-            if (!string.IsNullOrEmpty(contactParameters.Gender)) {
-                query = query.Where(q => q.Contact.Gender == contactParameters.Gender);
-            }
-
-            // Group by contact
-            var grouping = query.ToLookup(q => q.Contact.Id);   
-            Console.WriteLine("Items Count: {0}", grouping.Count);        
-
-            List<FullContact> fullContacts = new List<FullContact>{};
-            foreach (var item in grouping)
-            {
-                var fullContact = new FullContact() {
-                    FirstName = item.First().Contact.FirstName,
-                    LastName = item.First().Contact.LastName,
-                    Gender = item.First().Contact.Gender,
-                    ZipCode = item.First().Address.ZipCode,
-                    City = item.First().Address.City,
-                    Children = new List<Child>{}
-                };
-                
-                foreach (var i in item) {
-                    fullContact.Children.Add(
-                        new Child(){
-                            Name = i.ChildName
-                        }
-                    );
+                // Filters
+                if (!string.IsNullOrEmpty(contactParameters.Gender)) {
+                    query = query.Where(q => q.Contact.Gender == contactParameters.Gender);
                 }
 
-                fullContacts.Add(fullContact);
-            }
+                // Group by contact
+                var grouping = query.ToLookup(q => q.Contact.Id);   
+                Console.WriteLine("Items Count: {0}", grouping.Count);  
 
+                foreach (var item in grouping)
+                {
+                    var fullContact = new FullContact() {
+                        FirstName = item.First().Contact.FirstName,
+                        LastName = item.First().Contact.LastName,
+                        Gender = item.First().Contact.Gender,
+                        ZipCode = item.First().Address == null ? 0 : item.First().Address.ZipCode,
+                        City = item.First().Address?.City,
+                        Children = new List<Child>{}
+                    };
+                    
+                    foreach (var i in item) {
+                        if (i.Child != null) {
+                            fullContact.Children.Add(
+                                new Child(){
+                                    Name = i.Child.Name
+                                }
+                            );
+                        }
+                    }
+
+                    fullContacts.Add(fullContact);
+                }
+            }
+                  
             return fullContacts;
 		}
 	}
